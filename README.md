@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./logo.svg" alt="Nexus Scope Logo" width="150" height="150">
+  <img src="https://files.catbox.moe/1ioah2.png" alt="Nexus Scope Logo" width="150" height="150">
   <h1>Nexus Scope</h1>
   <p><strong>Inspector de red avanzado y escáner de API keys para el navegador.</strong></p>
   
