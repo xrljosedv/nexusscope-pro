@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⬡ NexusScope Pro · Demo</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;background:linear-gradient(160deg,#0b1220 0%,#0e1a2e 55%,#0b1220 100%);color:#eef4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:24px 18px 120px}
+  .wrap{max-width:720px;margin:0 auto}
+  .logo{font-size:44px;text-align:center}
+  h1{text-align:center;font-size:26px;margin:10px 0 4px;letter-spacing:.5px}
+  .sub{text-align:center;color:#a9b8d8;font-size:13px;margin-bottom:26px}
+  .chip{display:flex;align-items:center;gap:8px;margin:0 auto 22px;width:fit-content;padding:9px 16px;border-radius:99px;font-size:13px;font-weight:700;border:1px solid rgba(76,194,255,.35);background:rgba(76,194,255,.08)}
+  .chip .dot{width:10px;height:10px;border-radius:50%;background:#ffd166;animation:pulse 1.2s infinite}
+  .chip.ok{border-color:rgba(62,232,154,.45);background:rgba(62,232,154,.1);color:#b8ffe1}
+  .chip.ok .dot{background:#3ee89a;animation:none}
+  .chip.err{border-color:rgba(255,107,129,.45);background:rgba(255,107,129,.1);color:#ffc4cd}
+  .chip.err .dot{background:#ff6b81;animation:none}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .card{background:rgba(148,163,184,.07);border:1px solid rgba(148,163,184,.18);border-radius:18px;padding:18px;margin-bottom:14px}
+  .card h2{font-size:14px;color:#4cc2ff;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+  .card p,.card li{font-size:13.5px;color:#a9b8d8;line-height:1.65}
+  .card ol{padding-left:20px}
+  .card b{color:#eef4ff}
+  .btn{display:block;width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#0e5a72,#123c5e);color:#7dd8ff;font-size:15px;font-weight:800;letter-spacing:.4px;cursor:pointer;margin-top:4px}
+  .btn:active{opacity:.8}
+  pre{background:rgba(2,8,23,.6);border:1px solid rgba(148,163,184,.18);border-radius:12px;padding:12px;font-size:11px;overflow-x:auto;color:#9fd8ef;margin-top:10px;white-space:pre-wrap;word-break:break-all}
+  code.inline{background:rgba(76,194,255,.12);border-radius:6px;padding:2px 7px;color:#b8e9ff;font-size:12.5px}
+  .foot{text-align:center;color:#64748f;font-size:11.5px;margin-top:22px;line-height:1.7}
+  .foot b{color:#a9b8d8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">⬡</div>
+  <h1>NEXUSSCOPE PRO</h1>
+  <div class="sub">Network Inspector Pro v9.0 · por David Zuniga · mejorado por José</div>
+
+  <div class="chip" id="status"><span class="dot"></span><span id="statusTxt">Cargando NexusScope…</span></div>
+
+  <div class="card">
+    <h2>¿Qué es esta página?</h2>
+    <p>Es la <b>demo oficial</b> de NexusScope Pro (igual que <code class="inline">eruda.liriliri.io</code> para eruda). Esta página carga NexusScope <b>sobre sí misma</b>, así que al abrirla verás la burbuja ⬡ flotante y el panel del inspector abrirse automáticamente. Tócala para moverla o ciérrala cuando quieras.</p>
+  </div>
+
+  <div class="card">
+    <h2>El menú no se abrió solo</h2>
+    <button class="btn" id="openBtn">⬡ Abrir / cerrar menú</button>
+    <p style="margin-top:10px">Si el botón no funciona, el script no llegó a descargar (revisa que <code class="inline">nexusscope.js</code> esté en la raíz del repo y borra la caché de jsDelivr).</p>
+  </div>
+
+  <div class="card">
+    <h2>Usarlo en CUALQUIER otra web (bookmarklet)</h2>
+    <p>En tu navegador crea un marcador llamado <b>NexusScope</b> y de URL pega este código. En Chrome de Android: crea el marcador, luego en cualquier página escribe <b>“nexusscope”</b> en la barra de direcciones y toca la sugerencia:</p>
+    <pre id="bmCode"></pre>
+    <p>En PC también funciona pegándolo directamente en la consola (F12) de cualquier página.</p>
+  </div>
+
+  <div class="card">
+    <h2>API en consola</h2>
+    <p><code class="inline">NexusScope.toggle()</code> · <code class="inline">.report()</code> · <code class="inline">.export()</code> · <code class="inline">.plan()</code> · <code class="inline">.scan()</code> · <code class="inline">.mine()</code> — también con <code class="inline">Alt+S</code> en PC.</p>
+  </div>
+
+  <div class="foot">
+    ⬡ NexusScope Pro 9.0 · <b>David Zuniga</b> (creador) · <b>José</b> (editor) · MIT<br>
+    Herramienta de auditoría: úsala solo en sitios de tu propiedad o con autorización.
+  </div>
+</div>
+
+<script>
+(function () {
+  var BM = "javascript:(function(){var d=document,s=d.createElement('script');s.src='https://cdn.jsdelivr.net/gh/xrljosedv/nexusscope-pro@main/nexusscope.js';s.onerror=function(){alert('ERROR: no se pudo descargar nexusscope.js');};(d.body||d.documentElement).appendChild(s);})();";
+  document.getElementById("bmCode").textContent = BM;
+
+  var loaded = false;
+  function check() {
+    var ok = !!(window.__snifffer && typeof window.__snifffer.toggle === "function");
+    var chip = document.getElementById("status"), txt = document.getElementById("statusTxt");
+    if (ok) {
+      loaded = true;
+      chip.className = "chip ok";
+      txt.textContent = "NexusScope activo ✓ — burbuja y menú abiertos";
+    }
+    return ok;
+  }
+
+  function loadScript(src, onfail) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.onload = function () { setTimeout(check, 250); setTimeout(check, 1200); };
+    s.onerror = onfail;
+    (document.body || document.documentElement).appendChild(s);
+  }
+
+  // CDN principal: jsDelivr (GitHub) · respaldo: githack
+  loadScript("https://cdn.jsdelivr.net/gh/xrljosedv/nexusscope-pro@main/nexusscope.js", function () {
+    loadScript("https://raw.githack.com/xrljosedv/nexusscope-pro/main/nexusscope.js", function () {
+      var chip = document.getElementById("status"), txt = document.getElementById("statusTxt");
+      chip.className = "chip err";
+      txt.textContent = "No se pudo descargar nexusscope.js (revisa el repo o purga jsDelivr)";
+    });
+  });
+
+  document.getElementById("openBtn").addEventListener("click", function () {
+    if (window.__snifffer && typeof window.__snifffer.toggle === "function") {
+      window.__snifffer.toggle();
+    } else {
+      alert("NexusScope aún no está cargado en esta página.");
+    }
+  });
+
+  setTimeout(function () { if (!loaded) check(); }, 4000);
+})();
+</script>
+</body>
+</html>
