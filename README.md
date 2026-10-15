@@ -25,27 +25,51 @@ A diferencia de las herramientas de red tradicionales, Nexus Scope inyecta una i
 - 🎨 **UI Flotante:** Panel moderno con pestañas, fácil de ocultar y mostrar.
 - 🔄 **Auto-detección:** Si el script ya está activo, un segundo clic simplemente alterna la visibilidad del panel.
 
+## 📡 Métodos de CDN (Content Delivery Network)
+
+Puedes cargar Nexus Scope desde cualquiera de estos dos CDN. Ambos sirven el mismo código, pero tienen pequeñas diferencias:
+
+### 1. jsDelivr (Recomendado para versiones estables)
+👉 **URL:** `https://cdn.jsdelivr.net/npm/nexusscope-pro@9.0.0/nexusscope-pro-9.0.user.js`
+- ✅ Servido desde la red global de jsDelivr (muy rápido).
+- ✅ Versión bloqueada (`@9.0.0`), lo que garantiza estabilidad.
+- ✅ Ideal para instalar como **Userscript** (Tampermonkey/Violentmonkey).
+
+### 2. raw.githack (Recomendado para desarrollo/última versión)
+👉 **URL:** `https://raw.githack.com/xrljosedv/nexusscope-pro/main/nexusscope.js`
+- ✅ Sirve directamente el archivo `.js` desde la rama `main` de GitHub.
+- ✅ Siempre obtienes la última versión sin esperar a que se publique en npm.
+- ✅ Ideal para **Bookmarklets** (se ejecuta como script puro).
+
 ## 🚀 Instalación
 
 ### Opción 1: Userscript (Recomendado)
 La forma más potente de usar Nexus Scope. Se ejecuta automáticamente en todas las páginas **antes** de que carguen, capturando todo el tráfico desde el primer segundo.
 
 1. Instala un gestor de userscripts como **Tampermonkey** o **Violentmonkey** (Disponible en Chrome, Firefox, Edge y Kiwi Browser en Android).
-2. Abre el siguiente enlace para instalar el script:
+2. Abre el enlace de **jsDelivr** para instalar el script:
    👉 **[Instalar Nexus Scope v9.0](https://cdn.jsdelivr.net/npm/nexusscope-pro@9.0.0/nexusscope-pro-9.0.user.js)**
 3. Tampermonkey te pedirá confirmación. Haz clic en **Instalar**.
 
 ### Opción 2: Bookmarklet (Favoritos de Chrome)
 
-Ideal para pruebas rápidas sin instalar extensiones.
+Ideal para pruebas rápidas sin instalar extensiones. Puedes elegir el CDN que prefieras.
 
 #### 🖥️ En Chrome de Escritorio (PC/Mac):
 1. Haz clic derecho en la **barra de marcadores** y selecciona **"Añadir página..."**.
 2. En el campo **Nombre**, escribe: `Nexus Scope`.
-3. En el campo **URL**, pega el siguiente código:
+3. En el campo **URL**, pega **uno** de los siguientes códigos según el CDN que quieras usar:
+
+   **Opción A: Usando jsDelivr**
+   ```javascript
+   javascript:(function(){if(window.__snifffer&&typeof window.__snifffer.toggle==='function'){try{window.__snifffer.toggle()}catch(e){}return}var d=document,s=d.createElement('script');s.src='https://cdn.jsdelivr.net/npm/nexusscope-pro@9.0.0/nexusscope-pro-9.0.user.js';s.async=true;s.onload=function(){console.log('[NexusScope] Cargado')};s.onerror=function(){alert('Error: No se pudo cargar NexusScope')};var p=d.head||d.documentElement;p.appendChild(s)})();
+   ```
+
+   **Opción B: Usando raw.githack**
    ```javascript
    javascript:(function(){if(window.__snifffer&&typeof window.__snifffer.toggle==='function'){try{window.__snifffer.toggle()}catch(e){}return}var d=document,s=d.createElement('script');s.src='https://raw.githack.com/xrljosedv/nexusscope-pro/main/nexusscope.js';s.async=true;s.onload=function(){console.log('[NexusScope] Cargado correctamente')};s.onerror=function(){alert('Error: No se pudo cargar NexusScope.\n\nPrueba en otra página (ej. google.com).\nGitHub bloquea scripts externos por seguridad.')};var p=d.head||d.documentElement;p.appendChild(s)})();
    ```
+
 4. Guarda el marcador. Para usarlo, simplemente haz clic en él mientras navegas por cualquier página web.
 
 #### 📱 En Chrome para Android:
@@ -53,7 +77,7 @@ Ideal para pruebas rápidas sin instalar extensiones.
 2. Toca la **estrella ⭐** en la barra de direcciones para guardar la página en favoritos.
 3. En la ventana que aparece, toca **"Editar"**.
 4. En el campo **Nombre**, escribe: `Nexus Scope`.
-5. En el campo **URL**, borra todo el texto y **pega el código `javascript:...`** del paso 3 de la versión de escritorio.
+5. En el campo **URL**, borra todo el texto y **pega el código `javascript:...`** de la Opción A o B que elegiste arriba.
 6. Toca **Guardar**.
 7. **Para usarlo**: Ve a la barra de direcciones, escribe `Nexus Scope` y toca la sugerencia que aparece abajo (la que tiene el icono de estrella), o ábrelo desde el menú de Marcadores.
 
@@ -75,8 +99,8 @@ GitHub (y otros sitios como Google o bancos) tienen políticas de seguridad muy 
 **2. Instalé el Bookmarklet, pero no captura las peticiones iniciales.**
 Es normal. Al usar el Bookmarklet, el script se inyecta *después* de que la página ya se ha cargado. Por lo tanto, solo capturará el tráfico que ocurra a partir de ese momento. Para capturar el tráfico desde el primer segundo (tokens iniciales, API keys de carga), usa la **Opción 1 (Userscript)**.
 
-**3. ¿En qué navegadores móviles funciona mejor?**
-Para Android, se recomienda usar **Kiwi Browser** o **Firefox**, ya que permiten instalar extensiones como Tampermonkey y ejecutar el script al inicio de la carga.
+**3. ¿Cuál CDN debo elegir para el Bookmarklet?**
+Si quieres la versión más estable y probada, usa la **Opción A (jsDelivr)**. Si quieres probar las últimas modificaciones que se hayan subido a la rama `main` de GitHub, usa la **Opción B (raw.githack)**.
 
 ## 🧑‍💻 Autores y Créditos
 
