@@ -1,0 +1,42 @@
+{
+  "name": "nexusscope-pro",
+  "version": "9.0.0",
+  "description": "Network Inspector Pro · multi-token · API keys de pago (IA, pagos, SaaS) · antibot · captchas · PII · security · deep scan · minería JS/TS · descarga de fuentes · fingerprint · CORS · SSRF · runtime · playground · Tech Atlas · JSON/MD",
+  "main": "nexusscope.js",
+  "files": [
+    "nexusscope.js",
+    "nexusscope-pro-9.0.user.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"sin tests\" && exit 0"
+  },
+  "keywords": [
+    "security",
+    "network-inspector",
+    "devtools",
+    "recon",
+    "secrets",
+    "api-keys",
+    "pentesting",
+    "userscript",
+    "javascript",
+    "cdn"
+  ],
+  "authors": [
+    "David Zuniga (creador)",
+    "José (editor)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xrljosedv/nexusscope-pro.git"
+  },
+  "homepage": "https://github.com/xrljosedv/nexusscope-pro#readme",
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/xrljosedv/nexusscope-pro/issues"
+  }
+}
